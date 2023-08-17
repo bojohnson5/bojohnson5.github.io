@@ -8,18 +8,19 @@ tags = ["blogs", "byte"]
 My first summer as a graduate student I characterized a PMT for use in our upcoming ton-scale
 liquid argon neutrino detector. I'd never had hardware experience coming in from undergrad so
 I had to quickly learn not only about PMTs but also digitizers and the software used to control
-those digitizers and later analyze data. I've since become familiar with a couple of DAQ
+them and later analyze data. I've since become familiar with a couple of DAQ
 packages such as [ADAQ](https://github.com/zach-hartwig/ADAQ) and [WaveDump](https://www.caen.it/products/caen-wavedump/).
-The first package has built-in capabilities to save data to a ROOT file whereas the second
+The first package has built-in capabilities to save data to a ROOT file (ROOT being the
+aforementioned data analysis software) whereas the second
 one required another tool to do so. For that I used [TOWARD](https://github.com/jintonic/toward)
-developed by a collaborator at South Dakota which converts the WaveDump binaries to ROOT.
+developed by a collaborator at South Dakota that converts WaveDump binaries to ROOT.
 Now, using ROOT takes some getting used to and it's a great tool for physics experiments and
 physics analyses. However, I find the C++ baggage to slow down analysis and data exploration
-to the point where I wanted to look elsewhere to analyze data.
+to the point where I wanted to look elsewhere for a better-suited tool.
 
 At first I looked into PyROOT which are Python bindings to use ROOT libraries but inside
 the ease of Python programming. That means using Jupyter Notebooks is an option for plotting
-data, results, and quickly developing some new analysis techniques or tweaking old ones. I
+data and results and quickly developing some new analysis techniques or tweaking old ones. I
 like the ability to read any ROOT file like I would in a ROOT macro from Python, but once
 again, there are built-in limitations when you use Python. For example, I was attempting to
 work with results from a GEANT4 simulation with PyROOT which required looping over 
@@ -47,7 +48,7 @@ int n, len, tmp, cha, evt, ttt, tt, th, tl;
 ```
 
 This reads in the binary file and gets the file size in bytes along with creating variables
-to be stored in ROOT file. After creating ROOT file branches for the new file, the code 
+to be stored in a ROOT file. After creating ROOT branches for the new file, the code 
 reads the event header from the binary file. The binary file has a structure of six 
 four-byte integers followed by a series of ADC values stored from the digitizer. The number 
 of two-byte ADC integers is found in the header with a little algebra. The header and ADC 
@@ -69,7 +70,7 @@ while (input->good() && input->tellg()<fsize) {
 ```
 
 With the code above being the core of the what converts the binary file, I set about doing
-the same in Julia. I started with nearly and line-for-line rewrite, using something like:
+the same in Julia. I started with nearly a line-for-line rewrite, using something like:
 
 ```julia
 open("file", "w") do io
@@ -83,12 +84,12 @@ end
 ```
 
 Similar code would need to be written for the other variables and ADC values. But as you
-can imagine, this was pretty long and unwieldy, reading in each byte into a vector of
-the correct length and the reinterpreting it as the correct-sized integer. After reading
+can imagine, this was pretty long and unwieldy, reading in each byte into a vector bytes of
+the correct length and then reinterpreting it as the correct-sized integer. After reading
 different posts on the Julia [Discourse](https://discourse.julialang.org) and elsewhere
 I quickly found much simpler solutions than my naive rewrite above. It turns out you can
 directly read in the correct-sized integers with a simple `read(io, Int32)`, or better
-yet, read in the whole header as
+yet, read in the whole header and ADC values as
 
 ```julia
 header = read!(io, Vector{Int32}(undef, 6))
