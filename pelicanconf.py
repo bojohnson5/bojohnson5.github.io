@@ -24,9 +24,11 @@ LINKS = (
 )
 
 # Social widget
+SOCIAL_WIDGET_NAME = 'Find me here'
 SOCIAL = (
     ("Github", "https://github.com/bojohnson5"),
-    ("envelope", "mailto:bojohn@iu.edu"),
+    ("Email", "mailto:bojohn@iu.edu"),
+    ("Mastodon", "https://fediscience.org/@bojohn"),
 )
 
 DEFAULT_PAGINATION = 10
@@ -36,6 +38,6 @@ DEFAULT_PAGINATION = 10
 
 # Personal additions
 OUTPUT_PATH = "docs/"
-THEME = "attila"
+# THEME = "attila"
 
 MENUITEMS = (("Home", "/"),)
