@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Physical Constants - articles</title><link href="/" rel="alternate"></link><link href="/feeds/articles.atom.xml" rel="self"></link><id>/</id><updated>2024-03-02T00:00:00-05:00</updated><subtitle>Where the ethereal meets the ever-changing</subtitle><entry><title>Ch-Ch-Ch Changes</title><link href="/ch-ch-ch-changes.html" rel="alternate"></link><published>2024-03-02T00:00:00-05:00</published><updated>2024-03-02T00:00:00-05:00</updated><author><name>Bo Johnson</name></author><id>tag:None,2024-03-02:/ch-ch-ch-changes.html</id><content type="html">&lt;p&gt;I want to talk about why I made the change from using Julia to Python&lt;/p&gt;</content><category term="articles"></category><category term="python"></category><category term="julia"></category></entry><entry><title>Introduction to Physical Constants</title><link href="/introduction-to-physical-constants.html" rel="alternate"></link><published>2024-02-28T10:00:00-05:00</published><updated>2024-02-28T10:00:00-05:00</updated><author><name>Bo Johnson</name></author><id>tag:None,2024-02-28:/introduction-to-physical-constants.html</id><summary type="html">&lt;h1&gt;Why this blog?&lt;/h1&gt;
+&lt;p&gt;Because I find my thinking gets sharpened and my mind clearer
+when I write down all that's in my head. It's easy for stuff
+to get lost up there and my experience with graduate school
+has been to work on many different things at once. So much …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Why this blog?&lt;/h1&gt;
+&lt;p&gt;Because I find my thinking gets sharpened and my mind clearer
+when I write down all that's in my head. It's easy for stuff
+to get lost up there and my experience with graduate school
+has been to work on many different things at once. So much
+so that I often forget what I have worked on only a year prior.
+(I do have things in my logbook or I can look back at code, but
+the fast pace of switching between so many projects for me has
+been a whirlwind.) So hopefully taking the time to put things
+I'm working on down in a longer, more carefully thought-out
+format will cement them in my head, rather than flying about
+with every change of the wind. Additionally, by writing more
+frequently I'm hoping to develop better as a writer for the
+future.&lt;/p&gt;
+&lt;h1&gt;What will I write about?&lt;/h1&gt;
+&lt;p&gt;I'm mainly going to write about my research and related topics.
+This will include what little theory I know (I'm no theorist or 
+phenomenologist) so those posts will invariably contain mistakes
+that are my own. But I'll also write about analysis and coding
+and even personal adventures as I go along. &lt;/p&gt;
+&lt;h1&gt;How often will I write?&lt;/h1&gt;
+&lt;p&gt;That's the great question. I'm hoping I can write a post a week,
+that should motivate me to learn something interesting to write
+about or showcase what I've been working on. In any case, this
+is more a moonshot than a guarantee.&lt;/p&gt;
+&lt;h1&gt;Who is this blog for?&lt;/h1&gt;
+&lt;p&gt;I'm guessing only my mom would take the time to read this. Hi,
+Mom!&lt;/p&gt;</content><category term="Articles"></category><category term="intro"></category></entry></feed>
