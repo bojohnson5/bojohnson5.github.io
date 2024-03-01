@@ -7,9 +7,9 @@ physics at Indiana University. I'm studying how low-energy
 (less than 50 MeV, for those who know) neutrinos 
 interact in a liquid argon detector. This particular process has a long
 name, coherent elastic neutrino-nucleus scattering (CEvNS,
-pronounced "sevens"), and it has only recently been observed
+pronounced "sevens"), and it was only recently observed
 by the [collaboration](https://sites.duke.edu/coherent/) 
-I'm a part of. CEvNS gives a novel means
+I'm a part of. CEvNS provides a novel means
 of testing the standard model, our current best understanding
 of all the forces and particles in the universe and how they
 interact with each other (excepting, of course, gravity, for now?).

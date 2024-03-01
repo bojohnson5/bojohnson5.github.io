@@ -1,6 +1,6 @@
 AUTHOR = 'Bo Johnson'
 SITENAME = 'Physical Constants'
-SITESUBTITLE = "Personal site for Bo Johnson"
+SITESUBTITLE = "Where the ethereal meets the ever-changing"
 SITEURL = ""
 
 PATH = "content"
@@ -17,11 +17,11 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (
-    ("Pelican", "https://getpelican.com/"),
-    ("Python.org", "https://www.python.org/"),
-    ("Jinja2", "https://palletsprojects.com/p/jinja/"),
-)
+# LINKS = (
+#     ("Pelican", "https://getpelican.com/"),
+#     ("Python.org", "https://www.python.org/"),
+#     ("Jinja2", "https://palletsprojects.com/p/jinja/"),
+# )
 
 # Social widget
 SOCIAL_WIDGET_NAME = 'Find me here'

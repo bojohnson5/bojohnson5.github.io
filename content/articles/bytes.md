@@ -1,9 +1,8 @@
-Title: Byte
+Title: Takin' a Byte
 Date: 2024-02-28 13:48
 Category: Code
 Author: Bo Johnson
-
-# Takin' a Byte
+Tags: julia, c++, root
 
 My first summer as a graduate student I characterized a PMT for use in our upcoming ton-scale
 liquid argon neutrino detector. I'd never had hardware experience coming in from undergrad so
