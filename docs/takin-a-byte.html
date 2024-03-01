@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>Takin' a Byte</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+        <meta name="description" content="My first summer as a graduate student I characterized a PMT for use in our upcoming ton-scale liquid argon neutrino detector. I'd never had..." />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Physical Constants <strong>Where the ethereal meets the ever-changing</strong></a></h1>
+                <nav><ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/pages/about.html">About</a></li>
+                    <li><a href="/category/articles.html">articles</a></li>
+                    <li class="active"><a href="/category/code.html">Code</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/takin-a-byte.html" rel="bookmark"
+           title="Permalink to Takin' a Byte">Takin' a Byte</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2024-02-28T13:48:00-05:00">
+                Published: Wed 28 February 2024
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/bo-johnson.html">Bo Johnson</a>
+        </address>
+<p>In <a href="/category/code.html">Code</a>.</p>
+<p>tags: <a href="/tag/julia.html">julia</a> <a href="/tag/c.html">c++</a> <a href="/tag/root.html">root</a> </p>
+</footer><!-- /.post-info -->      <p>My first summer as a graduate student I characterized a PMT for use in our upcoming ton-scale
+liquid argon neutrino detector. I'd never had hardware experience coming in from undergrad so
+I had to quickly learn not only about PMTs but also digitizers and the software used to control
+them and later analyze data. I've since become familiar with a couple of DAQ
+packages such as <a href="https://github.com/zach-hartwig/ADAQ">ADAQ</a> and <a href="https://www.caen.it/products/caen-wavedump/">WaveDump</a>.
+The first package has built-in capabilities to save data to a ROOT file (ROOT being the
+aforementioned data analysis software) whereas the second
+one required another tool to do so. For that I used <a href="https://github.com/jintonic/toward">TOWARD</a>
+developed by a collaborator at South Dakota that converts WaveDump binaries to ROOT.
+Now, using ROOT takes some getting used to and it's a great tool for physics experiments and
+physics analyses. However, I find the C++ baggage to slow down analysis and data exploration
+to the point where I wanted to look elsewhere for a better-suited tool.</p>
+<p>At first I looked into PyROOT which are Python bindings to use ROOT libraries but inside
+the ease of Python programming. That means using Jupyter Notebooks is an option for plotting
+data and results and quickly developing some new analysis techniques or tweaking old ones. I
+like the ability to read any ROOT file like I would in a ROOT macro from Python, but once
+again, there are built-in limitations when you use Python. For example, I was attempting to
+work with results from a GEANT4 simulation with PyROOT which required looping over 
+200,000 generated events. The code I had was running for over an hour-and-a-half before I 
+gave up on it. The same ROOT macro, on the other hand, took 10-20 seconds to run. So I felt
+the need to look elsewhere for the ability to analyze data from a ROOT file that wasn't a 
+ROOT script or required PyROOT. And that led me back to Julia.</p>
+<p>I'd used Julia for a summer in undergrad for fun. I spent some time reading the documentation
+and different tutorials but never had a real project to put my mind towards solving with
+Julia. And I figured in grad school everyone used Python and ROOT (read C++) so I should
+stick with and master those. But now that I'd exhausted those options for what I was trying
+to do, I thought I could resurrect what I'd learned about Julia from a few years prior. One
+of the first things I wanted to do was revisit my PMT analysis code and rewrite some of it
+in Julia. A simple ROOT script from the TOWARD code was converting WaveDump binary files to
+ROOT. Here are a few lines from that code:</p>
+<div class="highlight"><pre><span></span><code><span class="n">ifstream</span><span class="w"> </span><span class="o">*</span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ifstream</span><span class="p">(</span><span class="n">Form</span><span class="p">(</span><span class="s">&quot;%s/%s&quot;</span><span class="p">,</span><span class="n">run</span><span class="p">,</span><span class="n">file</span><span class="p">),</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">binary</span><span class="p">);</span>
+<span class="n">input</span><span class="o">-&gt;</span><span class="n">seekg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">end</span><span class="p">);</span><span class="w"> </span><span class="c1">// move getter to the end of file</span>
+<span class="kt">long</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">fsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">tellg</span><span class="p">();</span><span class="c1">// get input file size</span>
+<span class="n">input</span><span class="o">-&gt;</span><span class="n">seekg</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ios</span><span class="o">::</span><span class="n">beg</span><span class="p">);</span><span class="w"> </span><span class="c1">// move getter back to the beginning</span>
+<span class="kt">short</span><span class="w"> </span><span class="n">adc</span><span class="p">[</span><span class="mi">99999</span><span class="p">]</span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">s</span><span class="p">[</span><span class="mi">99999</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w"> </span><span class="c1">// waveform samples</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="n">cha</span><span class="p">,</span><span class="w"> </span><span class="n">evt</span><span class="p">,</span><span class="w"> </span><span class="n">ttt</span><span class="p">,</span><span class="w"> </span><span class="n">tt</span><span class="p">,</span><span class="w"> </span><span class="n">th</span><span class="p">,</span><span class="w"> </span><span class="n">tl</span><span class="p">;</span>
+</code></pre></div>
+
+<p>This reads in the binary file and gets the file size in bytes along with creating variables
+to be stored in a ROOT file. After creating ROOT branches for the new file, the code 
+reads the event header from the binary file. The binary file has a structure of six 
+four-byte integers followed by a series of ADC values stored from the digitizer. The number 
+of two-byte ADC integers is found in the header with a little algebra. The header and ADC 
+values are read in as:</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">input</span><span class="o">-&gt;</span><span class="n">good</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">tellg</span><span class="p">()</span><span class="o">&lt;</span><span class="n">fsize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">len</span><span class="p">),</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// size of data [bytes]</span>
+<span class="w">  </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tmp</span><span class="p">),</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// board id</span>
+<span class="w">  </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tmp</span><span class="p">),</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// VME specific</span>
+<span class="w">  </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cha</span><span class="p">),</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// channel id</span>
+<span class="w">  </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">evt</span><span class="p">),</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// event id</span>
+<span class="w">  </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ttt</span><span class="p">),</span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// trigger time tag</span>
+<span class="w">  </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">len</span><span class="mi">-24</span><span class="p">)</span><span class="o">/</span><span class="n">ssize</span><span class="p">;</span><span class="w"> </span><span class="c1">// number of waveform samples</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">input</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">adc</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">ssize</span><span class="p">);</span><span class="w"> </span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">adc</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>With the code above being the core of the what converts the binary file, I set about doing
+the same in Julia. I started with nearly a line-for-line rewrite, using something like:</p>
+<div class="highlight"><pre><span></span><code><span class="n">open</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;w&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">io</span>
+<span class="w">  </span><span class="n">seekend</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+<span class="w">  </span><span class="n">fsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">position</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+<span class="w">  </span><span class="n">seekstart</span><span class="p">(</span><span class="n">io</span><span class="p">)</span>
+<span class="w">  </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">UInt8</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span>
+<span class="w">  </span><span class="n">read!</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="w">  </span><span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reinterpret</span><span class="p">(</span><span class="n">reshape</span><span class="p">,</span><span class="w"> </span><span class="kt">Int32</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Similar code would need to be written for the other variables and ADC values. But as you
+can imagine, this was pretty long and unwieldy, reading in each byte into a vector bytes of
+the correct length and then reinterpreting it as the correct-sized integer. After reading
+different posts on the Julia <a href="https://discourse.julialang.org">Discourse</a> and elsewhere
+I quickly found much simpler solutions than my naive rewrite above. It turns out you can
+directly read in the correct-sized integers with a simple <code>read(io, Int32)</code>, or better
+yet, read in the whole header and ADC values as</p>
+<div class="highlight"><pre><span></span><code><span class="n">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read!</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Int32</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">))</span>
+<span class="n">adcs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">read!</span><span class="p">(</span><span class="n">io</span><span class="p">,</span><span class="w"> </span><span class="kt">Vector</span><span class="p">{</span><span class="kt">Int16</span><span class="p">}(</span><span class="nb">undef</span><span class="p">,</span><span class="w"> </span><span class="n">adc_length</span><span class="p">))</span>
+</code></pre></div>
+
+<p>where the <code>adc_length</code> is determined as in the TOWARD code. This greatly simplified
+my first attempt at reading a binary file. And to take it one step further, I wanted
+to remove any ROOT dependency at all and found <a href="https://github.com/JuliaIO/JLD2.jl">JLD2.jl</a>
+which is a pure Julia file format. Adding in some code to save to a <code>.jld2</code> file and
+compressing it with <a href="https://github.com/JuliaIO/CodecZlib.jl">CodecZlib.jl</a> I could
+beat the compressed ROOT file by almost a factor of two.</p>
+<p>So if you find yourself needing to read a binary file from scratch, I'd recommend using
+Julia, as the ease and simplicity make for a great experience. And you can get back to
+your physics analysis sooner.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>Find me here</h2>
+                        <ul>
+
+                            <li><a href="https://github.com/bojohnson5">Github</a></li>
+                            <li><a href="mailto:bojohn@iu.edu">Email</a></li>
+                            <li><a href="https://fediscience.org/@bojohn">Mastodon</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
