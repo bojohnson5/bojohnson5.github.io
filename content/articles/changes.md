@@ -77,7 +77,7 @@ don't know how battle-tested it is.
 
 With all these little things starting to add up, I decided to once again give Python
 a try. That's because I (re)learned the benefits of using [Numba](numba.pydata.org)
-in conjunction wit Python. It's kind of like Julia in that you can compile Python
+in conjunction with Python. It's kind of like Julia in that you can compile Python
 code, but it's unlike Julia in that you only compile what you really need to speed up.
 So I can code and do analysis with nice-looking, easy to understand code wherever I 
 want, but when I need that extra speed boost, I put on my C++-style coding hat and 
