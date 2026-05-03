@@ -4,7 +4,8 @@ description = "Where I figure out how to read bytes"
 date = "2024-02-28"
 
 [taxonomies]
-blog-tags = ["Test", "Personal"]
+blog-tags = ["Programming", "DAQ"]
+skills = ["DAQ", "Programming", "Python", "ROOT", "C++", "Julia"]
 +++
 
 My first summer as a graduate student I characterized a PMT for use in our upcoming ton-scale

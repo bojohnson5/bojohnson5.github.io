@@ -4,7 +4,8 @@ description = "Where I talk about new things"
 date = "2024-03-02"
 
 [taxonomies]
-blog-tags = ["Test", "Personal"]
+blog-tags = ["Thoughts", "Programming"]
+skills = ["Programming", "Python", "C++", "Julia", "Rust"]
 +++
 
 # The early days

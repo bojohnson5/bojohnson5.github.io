@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sourdough Bread Formula Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useCallback } = React;
+
+    const PRESETS = [
+      {
+        name: "Traditional",
+        emoji: "🍞",
+        hydration: 0.75,
+        inclusions: [],
+        flours: [
+          { name: "KA AP", pct: 0.78 },
+          { name: "Whole Wheat", pct: 0.22 },
+        ],
+      },
+      {
+        name: "Jalapeño Cheddar Scallion",
+        emoji: "🌶️",
+        hydration: 0.72,
+        inclusions: [
+          { name: "Jalapeño", pct: 0.13 },
+          { name: "Cheddar", pct: 0.25 },
+          { name: "Scallion", pct: 0.04 },
+        ],
+        flours: [
+          { name: "KA AP", pct: 0.88 },
+          { name: "Whole Wheat", pct: 0.12 },
+        ],
+      },
+      {
+        name: "Garlic Parmesan",
+        emoji: "🧄",
+        hydration: 0.74,
+        inclusions: [
+          { name: "Garlic", pct: 0.12 },
+          { name: "Parmesan (grated)", pct: 0.13 },
+        ],
+        flours: [
+          { name: "KA AP", pct: 0.88 },
+          { name: "Whole Wheat", pct: 0.12 },
+        ],
+      },
+      {
+        name: "Cranberry Walnut",
+        emoji: "🍂",
+        hydration: 0.75,
+        inclusions: [
+          { name: "Cranberries", pct: 0.14 },
+          { name: "Walnuts", pct: 0.20 },
+        ],
+        flours: [
+          { name: "KA AP", pct: 0.85 },
+          { name: "Whole Wheat", pct: 0.15 },
+        ],
+      },
+      {
+        name: "Lemon & Herb",
+        emoji: "🍋",
+        hydration: 0.74,
+        inclusions: [
+          { name: "Lemon zest", pct: 0.002 },
+          { name: "Herbes de Provence", pct: 0.008 },
+        ],
+        flours: [
+          { name: "KA AP", pct: 0.88 },
+          { name: "Whole Wheat", pct: 0.12 },
+        ],
+      },
+      {
+        name: "Sun-dried Tomato & Olive",
+        emoji: "🫒",
+        hydration: 0.72,
+        inclusions: [
+          { name: "Sundried tomatoes", pct: 0.13 },
+          { name: "Olives", pct: 0.20 },
+        ],
+        flours: [
+          { name: "KA AP", pct: 0.88 },
+          { name: "Whole Wheat", pct: 0.12 },
+        ],
+      },
+    ];
+
+    const TYPICAL = [
+      { name: "Cranberries", pct: 0.14 },
+      { name: "Herbes de Provence", pct: 0.008 },
+      { name: "Honey", pct: 0.04 },
+      { name: "Lemon zest", pct: 0.002 },
+      { name: "Olive oil", pct: 0.04 },
+      { name: "Olives", pct: 0.20 },
+      { name: "Polenta", pct: 0.14 },
+      { name: "Rosemary", pct: 0.01 },
+      { name: "Sesame seeds", pct: 0.04 },
+      { name: "Sundried tomatoes", pct: 0.13 },
+      { name: "Sunflower seeds", pct: 0.15 },
+      { name: "Walnuts", pct: 0.20 },
+    ];
+
+    function calcFormula({ totalWeight, hydration, saltPct, pffPct, inoculation, inclusions }) {
+      const incSum = inclusions.reduce((s, i) => s + (parseFloat(i.pct) || 0), 0);
+      const denom = 1 + hydration + saltPct + incSum + pffPct * inoculation;
+      const totalFlour = totalWeight / denom;
+      const totalWater = totalFlour * hydration;
+      const totalSalt = totalFlour * saltPct;
+      const starterFlour = totalFlour * pffPct;
+      const starterWater = starterFlour;
+      const ripeStarter = starterFlour * inoculation;
+      const autolyseFlour = totalFlour - starterFlour;
+      const autolyseWater = totalWater - starterWater;
+      const incAmounts = inclusions.map((inc) => ({
+        ...inc,
+        grams: totalFlour * (parseFloat(inc.pct) || 0),
+      }));
+      return { totalFlour, totalWater, totalSalt, starterFlour, starterWater, ripeStarter, autolyseFlour, autolyseWater, incAmounts };
+    }
+
+    const g = (n) => `${Math.round(n * 10) / 10}g`;
+    const pct = (n) => `${Math.round(n * 1000) / 10}%`;
+
+    function ResultRow({ label, value, sub }) {
+      return (
+        <div className="result-row">
+          <span className="result-label">{label}</span>
+          <span className="result-value">
+            {value}
+            {sub && <span className="result-sub"> {sub}</span>}
+          </span>
+        </div>
+      );
+    }
+
+    function Section({ title, children }) {
+      return (
+        <div className="section">
+          <div className="section-title">{title}</div>
+          {children}
+        </div>
+      );
+    }
+
+    function BreadCalculator() {
+      const [totalWeight, setTotalWeight] = useState(1800);
+      const [hydration, setHydration] = useState(75);
+      const [saltPct, setSaltPct] = useState(2);
+      const [pffPct, setPffPct] = useState(14);
+      const [starterTime, setStarterTime] = useState(12);
+      const STARTER_INOCULATION = { 12: 0.10, 5: 0.50, 3: 1.00 };
+      const [inclusions, setInclusions] = useState([
+        { name: "", pct: 0 },
+        { name: "", pct: 0 },
+        { name: "", pct: 0 },
+      ]);
+      const [flours, setFlours] = useState([
+        { name: "KA AP", pct: 78 },
+        { name: "Whole Wheat", pct: 22 },
+      ]);
+      const [activePreset, setActivePreset] = useState(null);
+      const [showTypical, setShowTypical] = useState(false);
+
+      const loadPreset = useCallback((preset) => {
+        setHydration(Math.round(preset.hydration * 100));
+        const newInc = [
+          ...preset.inclusions.map((i) => ({
+            name: i.name,
+            pct: Math.round(i.pct * 1000) / 10,
+          })),
+          ...Array(Math.max(0, 3 - preset.inclusions.length)).fill({ name: "", pct: 0 }),
+        ].slice(0, 3);
+        setInclusions(newInc);
+        setFlours(preset.flours.map((f) => ({ name: f.name, pct: Math.round(f.pct * 100) })));
+        setActivePreset(preset.name);
+      }, []);
+
+      const inoculation = STARTER_INOCULATION[starterTime];
+      const result = calcFormula({
+        totalWeight: parseFloat(totalWeight) || 0,
+        hydration: (parseFloat(hydration) || 0) / 100,
+        saltPct: (parseFloat(saltPct) || 0) / 100,
+        pffPct: (parseFloat(pffPct) || 0) / 100,
+        inoculation,
+        inclusions: inclusions.map((i) => ({ ...i, pct: (parseFloat(i.pct) || 0) / 100 })),
+      });
+
+      const updateInclusion = (idx, field, val) => {
+        setActivePreset(null);
+        setInclusions((prev) => prev.map((inc, i) => (i === idx ? { ...inc, [field]: val } : inc)));
+      };
+
+      const updateFlour = (idx, field, val) => {
+        setFlours((prev) => prev.map((f, i) => (i === idx ? { ...f, [field]: val } : f)));
+      };
+
+      const flourTotal = flours.reduce((s, f) => s + (parseFloat(f.pct) || 0), 0);
+
+      return (
+        <>
+          <style>{`
+            @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+            body { background: #f5f0e8; min-height: 100vh; }
+            .app {
+              font-family: 'DM Sans', sans-serif;
+              font-weight: 300;
+              color: #2c1f14;
+              min-height: 100vh;
+              background: #f5f0e8;
+              background-image:
+                radial-gradient(ellipse at 20% 10%, rgba(180,130,70,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 90%, rgba(140,90,40,0.06) 0%, transparent 50%);
+              padding: 0 0 60px;
+            }
+            .header { text-align: center; padding: 44px 20px 32px; border-bottom: 1px solid rgba(100,60,20,0.12); margin-bottom: 32px; }
+            .header-eyebrow { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: #9a6b3a; margin-bottom: 10px; }
+            .header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 6vw, 52px); font-weight: 600; line-height: 1.1; color: #2c1f14; letter-spacing: -0.01em; }
+            .header h1 em { font-style: italic; color: #7a4a1e; }
+            .header-sub { margin-top: 8px; font-size: 13px; color: #7a6050; letter-spacing: 0.02em; }
+            .layout { max-width: 960px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+            @media (max-width: 680px) { .layout { grid-template-columns: 1fr; } }
+            .card { background: rgba(255,250,242,0.9); border: 1px solid rgba(160,110,60,0.15); border-radius: 12px; padding: 24px; }
+            .card-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: #2c1f14; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(160,110,60,0.15); letter-spacing: 0.01em; }
+            .presets { max-width: 960px; margin: 0 auto 24px; padding: 0 20px; }
+            .preset-label { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #9a6b3a; margin-bottom: 10px; }
+            .preset-row { display: flex; gap: 10px; flex-wrap: wrap; }
+            .preset-btn { background: rgba(255,250,242,0.9); border: 1px solid rgba(160,110,60,0.2); border-radius: 8px; padding: 10px 16px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: #4a3020; cursor: pointer; transition: all 0.15s ease; display: flex; align-items: center; gap: 8px; }
+            .preset-btn:hover { background: #f0e4d0; border-color: rgba(160,110,60,0.4); transform: translateY(-1px); box-shadow: 0 3px 12px rgba(100,60,20,0.1); }
+            .preset-btn.active { background: #7a4a1e; border-color: #7a4a1e; color: #f5ede0; }
+            .field-group { margin-bottom: 14px; }
+            .field-label { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #9a6b3a; margin-bottom: 5px; }
+            .field-row { display: flex; align-items: center; gap: 8px; }
+            .field-input { flex: 1; background: rgba(245,235,215,0.6); border: 1px solid rgba(160,110,60,0.2); border-radius: 7px; padding: 8px 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; color: #2c1f14; outline: none; transition: border-color 0.15s; width: 100%; }
+            .field-input:focus { border-color: #9a6b3a; background: #fff8f0; }
+            .field-unit { font-size: 12px; color: #9a6b3a; white-space: nowrap; font-weight: 400; min-width: 24px; }
+            .inc-row { display: grid; grid-template-columns: 1fr 80px 28px; gap: 6px; align-items: center; margin-bottom: 6px; }
+            .inc-remove { background: none; border: none; color: rgba(160,110,60,0.4); cursor: pointer; font-size: 15px; padding: 0; line-height: 1; transition: color 0.15s; }
+            .inc-remove:hover { color: #c0533a; }
+            .section { margin-bottom: 14px; }
+            .section-title { font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #9a6b3a; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid rgba(160,110,60,0.1); }
+            .flour-sub-row { display: flex; justify-content: space-between; align-items: baseline; padding: 2px 0 2px 12px; border-bottom: 1px solid rgba(160,110,60,0.04); }
+            .flour-sub-row:last-child { border-bottom: none; }
+            .flour-sub-label { font-size: 11px; color: #9a6b3a; }
+            .flour-sub-value { font-size: 11px; color: #9a6b3a; font-variant-numeric: tabular-nums; }
+            .result-row { display: flex; justify-content: space-between; align-items: baseline; padding: 5px 0; border-bottom: 1px solid rgba(160,110,60,0.06); }
+            .result-row:last-child { border-bottom: none; }
+            .result-label { font-size: 13px; color: #5a3c24; }
+            .result-value { font-size: 14px; font-weight: 500; color: #2c1f14; font-variant-numeric: tabular-nums; }
+            .result-sub { font-size: 11px; color: #9a6b3a; font-weight: 300; }
+            .result-highlight { background: rgba(122,74,30,0.06); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px; }
+            .result-highlight .result-row { padding: 3px 0; }
+            .flour-total-warn { font-size: 11px; color: #c0533a; margin-top: 4px; }
+            .flour-total-ok { font-size: 11px; color: #5a8c4a; margin-top: 4px; }
+            .divider { border: none; border-top: 1px solid rgba(160,110,60,0.12); margin: 14px 0; }
+            .typical-toggle { max-width: 960px; margin: 0 auto 16px; padding: 0 20px; }
+            .toggle-btn { background: none; border: 1px solid rgba(160,110,60,0.25); border-radius: 7px; padding: 8px 16px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 400; color: #7a4a1e; cursor: pointer; letter-spacing: 0.05em; transition: all 0.15s; }
+            .toggle-btn:hover { background: rgba(160,110,60,0.08); }
+            .typical-table { max-width: 960px; margin: 0 auto 24px; padding: 0 20px; }
+            .typical-grid { background: rgba(255,250,242,0.9); border: 1px solid rgba(160,110,60,0.15); border-radius: 12px; padding: 20px 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 24px; }
+            .typical-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding: 4px 0; border-bottom: 1px solid rgba(160,110,60,0.07); color: #4a3020; }
+            .typical-pct { font-variant-numeric: tabular-nums; color: #9a6b3a; font-weight: 500; font-size: 12px; }
+          `}</style>
+
+          <div className="app">
+            <div className="header">
+              <div className="header-eyebrow">Sourdough</div>
+              <h1>Bread <em>Formula</em></h1>
+              <div className="header-sub">Baker's percentage calculator</div>
+            </div>
+
+            <div className="layout">
+              <div className="card">
+                <div className="card-title">Formula Parameters</div>
+
+                <div className="field-group">
+                  <label className="field-label">Total dough weight</label>
+                  <div className="field-row">
+                    <input className="field-input" type="number" value={totalWeight}
+                      onChange={(e) => setTotalWeight(e.target.value === "" ? "" : parseFloat(e.target.value))}
+                      step="50" min="100" />
+                    <span className="field-unit">g</span>
+                  </div>
+                </div>
+
+                <div className="field-group">
+                  <label className="field-label">Hydration</label>
+                  <div className="field-row">
+                    <input className="field-input" type="number" value={hydration}
+                      onChange={(e) => { setHydration(e.target.value === "" ? "" : parseFloat(e.target.value)); setActivePreset(null); }}
+                      step="1" min="50" max="100" />
+                    <span className="field-unit">%</span>
+                  </div>
+                </div>
+
+                <div className="field-group">
+                  <label className="field-label">Salt</label>
+                  <div className="field-row">
+                    <input className="field-input" type="number" value={saltPct}
+                      onChange={(e) => setSaltPct(e.target.value === "" ? "" : parseFloat(e.target.value))}
+                      step="0.1" min="0" max="5" />
+                    <span className="field-unit">%</span>
+                  </div>
+                </div>
+
+                <div className="field-group">
+                  <label className="field-label">Pre-fermented flour (PFF)</label>
+                  <div className="field-row">
+                    <input className="field-input" type="number" value={pffPct}
+                      onChange={(e) => setPffPct(e.target.value === "" ? "" : parseFloat(e.target.value))}
+                      step="1" min="0" max="50" />
+                    <span className="field-unit">%</span>
+                  </div>
+                </div>
+
+                <div className="field-group">
+                  <label className="field-label">Starter build time</label>
+                  <div className="field-row">
+                    <select className="field-input" value={starterTime}
+                      onChange={(e) => setStarterTime(parseInt(e.target.value))}>
+                      <option value={12}>12 hours — 10% inoculation</option>
+                      <option value={5}>5 hours — 50% inoculation</option>
+                      <option value={3}>3 hours — 100% inoculation</option>
+                    </select>
+                  </div>
+                </div>
+
+                <hr className="divider" />
+
+                <div className="field-group">
+                  <label className="field-label">Inclusions (% of flour)</label>
+                  {inclusions.map((inc, i) => (
+                    <div className="inc-row" key={i}>
+                      <input className="field-input" type="text" placeholder={`Inclusion ${i + 1} name`}
+                        value={inc.name} onChange={(e) => updateInclusion(i, "name", e.target.value)} />
+                      <input className="field-input" type="number" placeholder="0" value={inc.pct}
+                        step="1" min="0" style={{ textAlign: "right" }}
+                        onChange={(e) => updateInclusion(i, "pct", e.target.value === "" ? "" : parseFloat(e.target.value))} />
+                      <button className="inc-remove"
+                        onClick={() => { updateInclusion(i, "pct", 0); updateInclusion(i, "name", ""); }}>×</button>
+                    </div>
+                  ))}
+                </div>
+
+                <hr className="divider" />
+
+                <div className="field-group">
+                  <label className="field-label">Flour blend (% of total flour)</label>
+                  {flours.map((f, i) => (
+                    <div className="inc-row" key={i}>
+                      <input className="field-input" type="text" value={f.name}
+                        onChange={(e) => updateFlour(i, "name", e.target.value)} />
+                      <input className="field-input" type="number" value={f.pct}
+                        step="1" min="0" max="100" style={{ textAlign: "right" }}
+                        onChange={(e) => updateFlour(i, "pct", e.target.value === "" ? "" : parseFloat(e.target.value))} />
+                      <button className="inc-remove"
+                        onClick={() => setFlours((prev) => prev.filter((_, j) => j !== i))}>×</button>
+                    </div>
+                  ))}
+                  <button className="toggle-btn" style={{ marginTop: 8, fontSize: 11 }}
+                    onClick={() => setFlours((prev) => [...prev, { name: "", pct: 0 }])}>
+                    + Add flour
+                  </button>
+                  {Math.abs(flourTotal - 100) > 0.5 && (
+                    <div className="flour-total-warn">⚠ Flour blend totals {flourTotal}% (should be 100%)</div>
+                  )}
+                  {Math.abs(flourTotal - 100) <= 0.5 && (
+                    <div className="flour-total-ok">✓ Flour blend totals 100%</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="card">
+                <div className="card-title">Formula Output</div>
+
+                <div className="result-highlight">
+                  <ResultRow label="Total flour" value={g(result.totalFlour)} />
+                  <ResultRow label="Total water" value={g(result.totalWater)} sub={`${hydration}%`} />
+                  <ResultRow label="Total salt" value={g(result.totalSalt)} sub={`${saltPct}%`} />
+                </div>
+
+                <Section title="Starter">
+                  <ResultRow label="Flour" value={g(result.starterFlour)} />
+                  {flours.length > 0 && Math.abs(flourTotal - 100) <= 0.5 && flours.map((f, i) => (
+                    <div className="flour-sub-row" key={i}>
+                      <span className="flour-sub-label">{f.name || `Flour ${i + 1}`}</span>
+                      <span className="flour-sub-value">{g(result.starterFlour * ((parseFloat(f.pct) || 0) / 100))} · {f.pct}%</span>
+                    </div>
+                  ))}
+                  <ResultRow label="Water" value={g(result.starterWater)} sub="100% hydration" />
+                  <ResultRow label="Ripe starter (inoculation)" value={g(result.ripeStarter)} sub={`${inoculation * 100}%`} />
+                  <ResultRow label="Build time" value={`${starterTime} hrs`} />
+                </Section>
+
+                <hr className="divider" />
+
+                <Section title="Autolyse / Mix-in">
+                  <ResultRow label="Flour" value={g(result.autolyseFlour)} />
+                  {flours.length > 0 && Math.abs(flourTotal - 100) <= 0.5 && flours.map((f, i) => (
+                    <div className="flour-sub-row" key={i}>
+                      <span className="flour-sub-label">{f.name || `Flour ${i + 1}`}</span>
+                      <span className="flour-sub-value">{g(result.autolyseFlour * ((parseFloat(f.pct) || 0) / 100))} · {f.pct}%</span>
+                    </div>
+                  ))}
+                  <ResultRow label="Water" value={g(result.autolyseWater)} />
+                </Section>
+
+                {result.incAmounts.some((i) => i.grams > 0) && (
+                  <>
+                    <hr className="divider" />
+                    <Section title="Inclusions">
+                      {result.incAmounts.filter((i) => i.grams > 0).map((inc, i) => (
+                        <ResultRow key={i} label={inc.name || `Inclusion ${i + 1}`}
+                          value={g(inc.grams)} sub={pct(inc.pct)} />
+                      ))}
+                    </Section>
+                  </>
+                )}
+              </div>
+            </div>
+
+            <div className="presets" style={{ marginTop: 24 }}>
+              <div className="preset-label">Load a recipe</div>
+              <div className="preset-row">
+                {PRESETS.map((p) => (
+                  <button key={p.name}
+                    className={`preset-btn ${activePreset === p.name ? "active" : ""}`}
+                    onClick={() => loadPreset(p)}>
+                    <span>{p.emoji}</span>
+                    <span>{p.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="typical-toggle">
+              <button className="toggle-btn" onClick={() => setShowTypical((v) => !v)}>
+                {showTypical ? "▲ Hide" : "▼ Show"} typical inclusion percentages
+              </button>
+            </div>
+
+            {showTypical && (
+              <div className="typical-table">
+                <div className="typical-grid">
+                  {TYPICAL.map((t) => (
+                    <div className="typical-row" key={t.name}>
+                      <span>{t.name}</span>
+                      <span className="typical-pct">{pct(t.pct)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<BreadCalculator />);
+  </script>
+</body>
+</html>

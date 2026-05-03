@@ -4,7 +4,8 @@ description = "Where I figure out how to read bytes, but better"
 date = "2024-03-01"
 
 [taxonomies]
-blog-tags = ["Test", "Personal"]
+blog-tags = ["Programming"]
+skills = ["DAQ", "Programming", "Python", "ROOT", "C++", "Julia"]
 +++
 
 I might have been a overzealous in my [previous post](@/blog/byte.md) 

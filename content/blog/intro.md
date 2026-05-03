@@ -4,7 +4,7 @@ description = "Where I give an overview of this blog and its purpose for existen
 date = "2024-02-28"
 
 [taxonomies]
-blog-tags = ["Test", "Personal"]
+blog-tags = ["Intro"]
 +++
 
 # Why this blog?

@@ -23,6 +23,9 @@ other_skills = "Additional Skills"
 words = "words"
 minutes = "minutes"
 
+[extra]
+math = true
+
 [extra.navbar]
 title = "Bytes of Physics"
 
@@ -46,9 +49,8 @@ github = "https://github.com/bojohnson5"
 email = "bo.johnson5@icloud.com"
 
 [markdown]
-highlight_code = true
-highlight_theme = "css"
-highlight_themes_css = [
-  { theme = "ayu-dark", filename = "syntax-dark.css" },
-  { theme = "ayu-light", filename = "syntax-light.css" },
-]
+[markdown.highlighting]
+enabled = true
+style = "class"
+light_theme = "github-light"
+dark_theme = "github-dark"
