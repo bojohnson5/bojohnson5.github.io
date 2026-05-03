@@ -91,6 +91,20 @@
           { name: "Whole Wheat", pct: 0.12 },
         ],
       },
+      {
+        name: "The Jacob Special",
+        emoji: "🌾",
+        totalWeight: 1750,
+        hydration: 0.737,
+        salt: 0.0182,
+        pff: 0.0875,
+        inclusions: [],
+        flours: [
+          { name: "KA AP", pct: 0.67 },
+          { name: "Fresh milled hard red wheat", pct: 0.165 },
+          { name: "KA Bread Flour", pct: 0.165 },
+        ],
+      },
     ];
 
     const TYPICAL = [
@@ -171,6 +185,9 @@
 
       const loadPreset = useCallback((preset) => {
         setHydration(Math.round(preset.hydration * 100));
+        if (preset.totalWeight) setTotalWeight(preset.totalWeight);
+        if (preset.salt) setSaltPct(preset.salt * 100);
+        if (preset.pff) setPffPct(Math.round(preset.pff * 1000) / 10);
         const newInc = [
           ...preset.inclusions.map((i) => ({
             name: i.name,
