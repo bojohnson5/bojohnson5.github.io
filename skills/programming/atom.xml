@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Bytes of Physics - Programming</title>
+    <link rel="self" type="application/atom+xml" href="https://bojohnson5.github.io/skills/programming/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://bojohnson5.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-03-02T00:00:00+00:00</updated>
+    <id>https://bojohnson5.github.io/skills/programming/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Ch-ch-ch changes</title>
+        <published>2024-03-02T00:00:00+00:00</published>
+        <updated>2024-03-02T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://bojohnson5.github.io/blog/changes/"/>
+        <id>https://bojohnson5.github.io/blog/changes/</id>
+        
+        <content type="html" xml:base="https://bojohnson5.github.io/blog/changes/">&lt;h1 id=&quot;the-early-days&quot;&gt;The early days&lt;&#x2F;h1&gt;
+&lt;p&gt;I have to make a confession at the start here. I&#x27;m like a squirrel in the middle
+of a field full of nuts when it comes to technology: I run around trying all
+the latest things and never stick around on one piece of tech for long. This
+not only include gadgets like phones or computers, but also operating systems
+and programming languages. I think this stems from my earliest days learning to
+program and doing research in undergrad. When you&#x27;re first introduced to Linux,
+which a lot of physicists tend to use because it&#x27;s free, you&#x27;re immediately
+immersed in a world that offers tons of possibilities and choices. One day you can be on
+Linux Mint and then the next Ubuntu, followed by Fedora or Arch. Not to mention
+all the flavors and desktops you can try as well. Then there are the programming
+language options. I learned C++ because of the intro computer science courses but
+was also asked to learn Fortran with the first professor I worked with. Then
+it&#x27;s easy to see how much easier some tasks can be done in Matlab or Python or
+Java or, or, or… And my personality is to want to learn all the things. So while
+I spent time learning multiples of these I never got that great in any. I&#x27;d say
+I was the most exposed and experienced with C++ because I took so many courses that taught it, but
+for research and personal stuff I would hop around and try different things.&lt;&#x2F;p&gt;
+&lt;p&gt;So when I started grad school I thought I would try to stick to whatever people
+around me were using. In particle physics this tends to be C++ because ROOT.
+I&#x27;ve certainly learned how to use that and feel comfortable in manipulating
+ROOT files and creating ROOT scripts and plotting in ROOT. But honestly it feels
+like you need to have mild psychosis to want to do serious analysis in ROOT, and
+by extension, C++. It&#x27;s just that it takes so much coding in order to accomplish
+any small take such as plotting data. What would take two or three lines in Python
+script requires multiples of that in C++. It&#x27;s really painful. It&#x27;s not elegant,
+either. You really have to contort your thinking to the mold of C++ for the analysis
+rather than the language you&#x27;re using being molded to your analysis. Which is why
+for a while I also tried to do things in Python. It&#x27;s really nice to program in
+Python because it&#x27;s higher-level constructs like list comprehensions, generators,
+and functional programming tools make it possible to shape the code to how you
+envision the analysis unfolding.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;the-matchup&quot;&gt;The matchup&lt;&#x2F;h1&gt;
+&lt;p&gt;The issue with Python though is it&#x27;s speed. Now any programming language is fast
+by any means and for really any normal task I come across. (Admittedly, I&#x27;m not
+a programmer by trade and so normal tasks for me are analyzing data, plotting,
+fitting data, etc.). But when it comes to analyzing gigabytes of data that contain
+hundreds of thousands of simulated physics interactions, for example, Python tends
+to grind to a halt. So it seemed, when I started grad school and doing research,
+the only options were Python for the simple things like plotting, but having to
+use C++ for serious lifting.&lt;&#x2F;p&gt;
+&lt;p&gt;Enter Julia. I learned a bit about Julia over a summer intership during undergrad.
+I spent a lot of time learning it&#x27;s ins and outs and think it&#x27;s got some really
+neat features. I was drawn to its mantra &quot;Walks like Python, runs like C&quot; because
+that was the problem I had hoped to solve with Python and ROOT. When I was
+running up against the wall with analysis, not wanting to use ROOT and waiting for
+Python to finish running, I started accomplishing my work with Julia. I&#x27;ve even
+contributed to a Julia package I used quite often. Once I started using Julia for
+more things, I started to get hung up on little things here and there. The one
+issue you have to deal with whenever you run code is waiting for it to compile. So
+if you&#x27;re wanting to do some plots, you have to wait for tens of seconds for it to
+compile first. I know that issue has been one of the most pressing for the Julia
+community and a lot of work has gone into bringing the so-called time to first plot
+down, but it still isn&#x27;t as nice as using Python for simple things there. Another
+thing I&#x27;d run up against was the lack of mature packages. Julia is a lot less
+established than Python and so looking for packages to do something like curve
+fitting isn&#x27;t as straight forward as using SciPy. The package universe in Julia
+is more disparate and less well maintained, for the things I was hoping to get done.
+It&#x27;s really nice that the usual libraries in Python for scientific research have
+been around a long time and are really well maintainted and tested, like NumPy,
+SciPy, Matplotlib, etc. In Julia there&#x27;s no standard for curve fitting or integration
+or even plotting. So it&#x27;s easy to look at any package askanse in Julia because you
+don&#x27;t know how battle-tested it is.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;the-result&quot;&gt;The result&lt;&#x2F;h1&gt;
+&lt;p&gt;With all these little things starting to add up, I decided to once again give Python
+a try. That&#x27;s because I (re)learned the benefits of using &lt;a href=&quot;https:&#x2F;&#x2F;bojohnson5.github.io&#x2F;blog&#x2F;changes&#x2F;numba.pydata.org&quot;&gt;Numba&lt;&#x2F;a&gt;
+in conjunction with Python. It&#x27;s kind of like Julia in that you can compile Python
+code, but it&#x27;s unlike Julia in that you only compile what you really need to speed up.
+So I can code and do analysis with nice-looking, easy to understand code wherever I
+want, but when I need that extra speed boost, I put on my C++-style coding hat and
+write some Python code that Numba is able to compile. Now things run as fast as I need
+and there&#x27;s no more bottleneck in Python. I get to use the nice Python packages that
+have been around for a long time and know there&#x27;s more helpful information out there
+on the internet with any question I might have, too.&lt;&#x2F;p&gt;
+&lt;p&gt;So right now, I&#x27;m trying to do the responsible thing and stick to a single programming
+language for physics analysis. Python&#x27;s actually been quite easy to pick up again and
+I&#x27;m hoping my squirrel brain won&#x27;t be too perturbed by all the shiny-looking languages
+out there (looking at you &lt;a href=&quot;https:&#x2F;&#x2F;bojohnson5.github.io&#x2F;blog&#x2F;changes&#x2F;www.rust-lang.org&quot;&gt;Rust&lt;&#x2F;a&gt;).&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Bytes, reloaded</title>
+        <published>2024-03-01T00:00:00+00:00</published>
+        <updated>2024-03-01T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://bojohnson5.github.io/blog/byte-reload/"/>
+        <id>https://bojohnson5.github.io/blog/byte-reload/</id>
+        
+        <content type="html" xml:base="https://bojohnson5.github.io/blog/byte-reload/">&lt;p&gt;I might have been a overzealous in my &lt;a href=&quot;https:&#x2F;&#x2F;bojohnson5.github.io&#x2F;blog&#x2F;byte&#x2F;&quot;&gt;previous post&lt;&#x2F;a&gt;
+about using &lt;a href=&quot;https:&#x2F;&#x2F;bojohnson5.github.io&#x2F;blog&#x2F;byte-reload&#x2F;www.julialang.org&quot;&gt;Julia&lt;&#x2F;a&gt; as the best way
+for parsing binary files in the most efficient, pleasant-to-use manner. I think I was
+also too eager to forgo using Python in my analysis due to slow looping. I&#x27;ll save most of
+my reasons in switching from Julia to Python in another post, but I wanted to revisit how
+I parsed the &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.caen.it&#x2F;products&#x2F;caen-wavedump&#x2F;&quot;&gt;WaveDump&lt;&#x2F;a&gt; output files and
+do the same thing in Python. Mostly as a way for me to get back into writing posts
+but also to provide the stepping stone for the next post on switching languages.&lt;&#x2F;p&gt;
+&lt;p&gt;To recap WaveDump outputs binary files in a structure where the first six 32-bit values
+constitute the header, giving information on the number of waveform samples coming next
+and waveform number count. Then based on the header info we can read the next &lt;code&gt;n&lt;&#x2F;code&gt; 16-bit
+values as the waveform ADC values. I looked at several different ways to accomplish this
+in Python, one method using &lt;a href=&quot;https:&#x2F;&#x2F;bojohnson5.github.io&#x2F;blog&#x2F;byte-reload&#x2F;www.numpy.org&quot;&gt;NumPy&lt;&#x2F;a&gt;, another using the built-in module
+&lt;code&gt;struct&lt;&#x2F;code&gt;, but the one I found easiest to do this in was with the built-in module &lt;code&gt;array&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+&lt;p&gt;The code looks like&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo z-code&quot;&gt;&lt;code data-lang=&quot;python&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-keyword&quot;&gt;import&lt;&#x2F;span&gt;&lt;span&gt; array&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-keyword&quot;&gt;import&lt;&#x2F;span&gt;&lt;span&gt; numpy&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt; as&lt;&#x2F;span&gt;&lt;span&gt; np&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;def&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt; read_binary_file_array&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-parameter z-function&quot;&gt;file_path&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-keyword&quot;&gt;    with&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt; open&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;file_path&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string&quot;&gt;rb&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt; as&lt;&#x2F;span&gt;&lt;span&gt; binary_file&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;        header&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt; =&lt;&#x2F;span&gt;&lt;span&gt; array&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;array&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string&quot;&gt;I&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;        data&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt; =&lt;&#x2F;span&gt;&lt;span&gt; array&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;array&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string&quot;&gt;H&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-keyword&quot;&gt;        while&lt;&#x2F;span&gt;&lt;span&gt; binary_file&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;peek&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt; !=&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt; b&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;#39;&lt;&#x2F;span&gt;&lt;span&gt;:&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;            header&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;fromfile&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;binary_file&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt; 6&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;            data&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;fromfile&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;binary_file&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt; 500&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-keyword&quot;&gt;    return&lt;&#x2F;span&gt;&lt;span&gt; np&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;array&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;header&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;reshape&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;-&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt; 6&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; np&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;array&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;data&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;.&lt;&#x2F;span&gt;&lt;span&gt;reshape&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;-&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;1&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt; 500&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;The nice thing about the &lt;code&gt;array&lt;&#x2F;code&gt; module is continuing to read into an already-created
+array will just append the values, whereas the other two methods I tried you need to do
+the appending yourself. I return as &lt;code&gt;numpy&lt;&#x2F;code&gt; arrays and can reshape them into however
+many waveforms were taken during the data run. There should be some more work done on
+determining how long the waveforms are and making this function more general, but for the
+current purpose I think it shows how easy it is to accompish this same task of reading
+custom binary files in Python as it is in other languages.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Takin&#x27; a byte</title>
+        <published>2024-02-28T00:00:00+00:00</published>
+        <updated>2024-02-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://bojohnson5.github.io/blog/byte/"/>
+        <id>https://bojohnson5.github.io/blog/byte/</id>
+        
+        <content type="html" xml:base="https://bojohnson5.github.io/blog/byte/">&lt;p&gt;My first summer as a graduate student I characterized a PMT for use in our upcoming ton-scale
+liquid argon neutrino detector. I&#x27;d never had hardware experience coming in from undergrad so
+I had to quickly learn not only about PMTs but also digitizers and the software used to control
+them and later analyze data. I&#x27;ve since become familiar with a couple of DAQ
+packages such as &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;zach-hartwig&#x2F;ADAQ&quot;&gt;ADAQ&lt;&#x2F;a&gt; and &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;www.caen.it&#x2F;products&#x2F;caen-wavedump&#x2F;&quot;&gt;WaveDump&lt;&#x2F;a&gt;.
+The first package has built-in capabilities to save data to a ROOT file (ROOT being the
+aforementioned data analysis software) whereas the second
+one required another tool to do so. For that I used &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;jintonic&#x2F;toward&quot;&gt;TOWARD&lt;&#x2F;a&gt;
+developed by a collaborator at South Dakota that converts WaveDump binaries to ROOT.
+Now, using ROOT takes some getting used to and it&#x27;s a great tool for physics experiments and
+physics analyses. However, I find the C++ baggage to slow down analysis and data exploration
+to the point where I wanted to look elsewhere for a better-suited tool.&lt;&#x2F;p&gt;
+&lt;p&gt;At first I looked into PyROOT which are Python bindings to use ROOT libraries but inside
+the ease of Python programming. That means using Jupyter Notebooks is an option for plotting
+data and results and quickly developing some new analysis techniques or tweaking old ones. I
+like the ability to read any ROOT file like I would in a ROOT macro from Python, but once
+again, there are built-in limitations when you use Python. For example, I was attempting to
+work with results from a GEANT4 simulation with PyROOT which required looping over
+200,000 generated events. The code I had was running for over an hour-and-a-half before I
+gave up on it. The same ROOT macro, on the other hand, took 10-20 seconds to run. So I felt
+the need to look elsewhere for the ability to analyze data from a ROOT file that wasn&#x27;t a
+ROOT script or required PyROOT. And that led me back to Julia.&lt;&#x2F;p&gt;
+&lt;p&gt;I&#x27;d used Julia for a summer in undergrad for fun. I spent some time reading the documentation
+and different tutorials but never had a real project to put my mind towards solving with
+Julia. And I figured in grad school everyone used Python and ROOT (read C++) so I should
+stick with and master those. But now that I&#x27;d exhausted those options for what I was trying
+to do, I thought I could resurrect what I&#x27;d learned about Julia from a few years prior. One
+of the first things I wanted to do was revisit my PMT analysis code and rewrite some of it
+in Julia. A simple ROOT script from the TOWARD code was converting WaveDump binary files to
+ROOT. Here are a few lines from that code:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo z-code&quot;&gt;&lt;code data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;ifstream &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;*&lt;&#x2F;span&gt;&lt;span&gt;input &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt; new&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt; ifstream&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;Form&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;%s&lt;&#x2F;span&gt;&lt;span class=&quot;z-string&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;%s&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt;run&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt;file&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt; ios&lt;&#x2F;span&gt;&lt;span&gt;::&lt;&#x2F;span&gt;&lt;span&gt;binary&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;seekg&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt; ios&lt;&#x2F;span&gt;&lt;span&gt;::&lt;&#x2F;span&gt;&lt;span&gt;end&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; move getter to the end of file&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;long&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt; int&lt;&#x2F;span&gt;&lt;span&gt; fsize &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other&quot;&gt; input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;tellg&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt;&#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; get input file size&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;seekg&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt; ios&lt;&#x2F;span&gt;&lt;span&gt;::&lt;&#x2F;span&gt;&lt;span&gt;beg&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; move getter back to the beginning&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;short&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other&quot;&gt; adc&lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;99999&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; {&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt; float&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other&quot;&gt; s&lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;99999&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt;{&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; waveform samples&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; n&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; len&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; tmp&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; cha&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; evt&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; ttt&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; tt&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; th&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; tl&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;This reads in the binary file and gets the file size in bytes along with creating variables
+to be stored in a ROOT file. After creating ROOT branches for the new file, the code
+reads the event header from the binary file. The binary file has a structure of six
+four-byte integers followed by a series of ADC values stored from the digitizer. The number
+of two-byte ADC integers is found in the header with a little algebra. The header and ADC
+values are read in as:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo z-code&quot;&gt;&lt;code data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-keyword&quot;&gt;while&lt;&#x2F;span&gt;&lt;span&gt; (&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;good&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt; &amp;amp;&amp;amp;&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other&quot;&gt; input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;tellg&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span&gt;fsize&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt; {&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;  input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;reinterpret_cast&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;char&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;len&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; size of data [bytes]&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;  input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;reinterpret_cast&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;char&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;tmp&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; board id&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;  input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;reinterpret_cast&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;char&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;tmp&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; VME specific&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;  input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;reinterpret_cast&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;char&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;cha&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; channel id&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;  input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;reinterpret_cast&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;char&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;evt&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; event id&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;  input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;reinterpret_cast&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;char&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span&gt;ttt&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;4&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; trigger time tag&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;  n &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt; (&lt;&#x2F;span&gt;&lt;span&gt;len&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;-&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;24&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&#x2F;&lt;&#x2F;span&gt;&lt;span&gt;ssize&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-comment&quot;&gt; &#x2F;&#x2F;&lt;&#x2F;span&gt;&lt;span class=&quot;z-comment&quot;&gt; number of waveform samples&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-keyword&quot;&gt;  for&lt;&#x2F;span&gt;&lt;span&gt; (&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;int&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt;0&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span&gt;n&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span&gt; i&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;++&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt; {&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;    input&lt;&#x2F;span&gt;&lt;span&gt;-&amp;gt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-entity z-name&quot;&gt;read&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;reinterpret_cast&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;lt;&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;char&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;*&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;gt;&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;&amp;amp;&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;adc&lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span&gt;i&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt;ssize&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other&quot;&gt; s&lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span&gt;i&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-storage z-type&quot;&gt;float&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span class=&quot;z-variable z-other&quot;&gt;adc&lt;&#x2F;span&gt;&lt;span&gt;[&lt;&#x2F;span&gt;&lt;span&gt;i&lt;&#x2F;span&gt;&lt;span&gt;]&lt;&#x2F;span&gt;&lt;span&gt;;&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;  }&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;}&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;With the code above being the core of the what converts the binary file, I set about doing
+the same in Julia. I started with nearly a line-for-line rewrite, using something like:&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo z-code&quot;&gt;&lt;code data-lang=&quot;julia&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-support&quot;&gt;open&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string&quot;&gt;file&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt; &amp;quot;&lt;&#x2F;span&gt;&lt;span class=&quot;z-string&quot;&gt;w&lt;&#x2F;span&gt;&lt;span class=&quot;z-punctuation z-definition z-string&quot;&gt;&amp;quot;&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt; do&lt;&#x2F;span&gt;&lt;span&gt; io&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-support&quot;&gt;  seekend&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;io&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;  fsize &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt; position&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;io&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-support&quot;&gt;  seekstart&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;io&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;  len &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt; Vector&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt;{UInt8}&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;undef&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt; 4&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-support&quot;&gt;  read!&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;io&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; len&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;  len &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt; reinterpret&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;reshape&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; Int32&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; len&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span class=&quot;z-keyword&quot;&gt;end&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;Similar code would need to be written for the other variables and ADC values. But as you
+can imagine, this was pretty long and unwieldy, reading in each byte into a vector bytes of
+the correct length and then reinterpreting it as the correct-sized integer. After reading
+different posts on the Julia &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;discourse.julialang.org&quot;&gt;Discourse&lt;&#x2F;a&gt; and elsewhere
+I quickly found much simpler solutions than my naive rewrite above. It turns out you can
+directly read in the correct-sized integers with a simple &lt;code&gt;read(io, Int32)&lt;&#x2F;code&gt;, or better
+yet, read in the whole header and ADC values as&lt;&#x2F;p&gt;
+&lt;pre class=&quot;giallo z-code&quot;&gt;&lt;code data-lang=&quot;julia&quot;&gt;&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;header &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt; read!&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;io&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt; Vector&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt;{Int32}&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;undef&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-constant&quot;&gt; 6&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;
+&lt;span class=&quot;giallo-l&quot;&gt;&lt;span&gt;adcs &lt;&#x2F;span&gt;&lt;span class=&quot;z-keyword&quot;&gt;=&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt; read!&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;io&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt; Vector&lt;&#x2F;span&gt;&lt;span class=&quot;z-support&quot;&gt;{Int16}&lt;&#x2F;span&gt;&lt;span&gt;(&lt;&#x2F;span&gt;&lt;span&gt;undef&lt;&#x2F;span&gt;&lt;span&gt;,&lt;&#x2F;span&gt;&lt;span&gt; adc_length&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;span&gt;)&lt;&#x2F;span&gt;&lt;&#x2F;span&gt;&lt;&#x2F;code&gt;&lt;&#x2F;pre&gt;
+&lt;p&gt;where the &lt;code&gt;adc_length&lt;&#x2F;code&gt; is determined as in the TOWARD code. This greatly simplified
+my first attempt at reading a binary file. And to take it one step further, I wanted
+to remove any ROOT dependency at all and found &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;JuliaIO&#x2F;JLD2.jl&quot;&gt;JLD2.jl&lt;&#x2F;a&gt;
+which is a pure Julia file format. Adding in some code to save to a &lt;code&gt;.jld2&lt;&#x2F;code&gt; file and
+compressing it with &lt;a rel=&quot;external&quot; href=&quot;https:&#x2F;&#x2F;github.com&#x2F;JuliaIO&#x2F;CodecZlib.jl&quot;&gt;CodecZlib.jl&lt;&#x2F;a&gt; I could
+beat the compressed ROOT file by almost a factor of two.&lt;&#x2F;p&gt;
+&lt;p&gt;So if you find yourself needing to read a binary file from scratch, I&#x27;d recommend using
+Julia, as the ease and simplicity make for a great experience. And you can get back to
+your physics analysis sooner.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

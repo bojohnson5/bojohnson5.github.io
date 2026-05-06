@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Bytes of Physics - Physics</title>
+    <link rel="self" type="application/atom+xml" href="https://bojohnson5.github.io/blog-tags/physics/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://bojohnson5.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-02-13T00:00:00+00:00</updated>
+    <id>https://bojohnson5.github.io/blog-tags/physics/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Blastin&#x27; off like a rocket</title>
+        <published>2025-02-13T00:00:00+00:00</published>
+        <updated>2025-02-13T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://bojohnson5.github.io/blog/rocket/"/>
+        <id>https://bojohnson5.github.io/blog/rocket/</id>
+        
+        <content type="html" xml:base="https://bojohnson5.github.io/blog/rocket/">&lt;p&gt;When taking classical mechanics as an undergraduate I remember going through the example of the rocket equation
+from Taylor&#x27;s book and thinking it was going about the derivation in a more difficult way than it could have
+been presented. The general equation you start with for any dynamics problem in classical mechanics (at least
+starting out) is $F^{ext}=m\frac{dv}{dt}$ which assumes the mass doesn&#x27;t change. But for the rocket equation we
+can no longer make that assumption and have to use the more general equation $F^{ext}=\dot{p}$. I want to show
+how a short circuit in thinking beginning with this equation yields the same results as Taylor does using the
+approach of differentials.&lt;&#x2F;p&gt;
+&lt;p&gt;To get to that point I first need to lay out the problem we&#x27;re looking at. A rocket is launched vertically from
+the Earth&#x27;s surface with the exhaust velocity $v_{ex}$ relative to the rocket. We also assume a constant
+gravitational acceleration throughout the flight. Mass is ejected at a constant rate of $m_0&#x2F;\tau$. We want to
+find the height of the rocket as a function of time.&lt;&#x2F;p&gt;
+&lt;p&gt;For an object experiencing an external force the equation of motion is (from above) $F^{ext}=\dot{p}$. Any
+internal forces, like that from the exhaust pushing on the rocket, can be ignored from Newton&#x27;s Third Law. Now
+for the heuristic trick to make this super easy. With $p=mv$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\dot{p} = \dot{m}v + m\dot{v} = F^{ext}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;The first term in the middle can be read &quot;the little bit of ejected mass times its velocity (which relative
+to the rocket is always $v_{ex}$) plus the mass of the rocket times its change in velocity is due to the external
+force (which is gravity).&quot; In the end the result will look like&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+\dot{m}v_{ex} + m\dot{v} = -mg
+$$
+$$
+\frac{dv}{dt} = -g - \frac{(m_0&#x2F;\tau) v_{ex}}{m}
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;And the last important note is that the mass itself is a function of time with $m(t)=m_0-m_0&#x2F;\tau t$. This is
+then a relatively simple first-order ODE (I can never remember how to solve these things) which can be
+integrated twice to find the height as a function of time.&lt;&#x2F;p&gt;
+&lt;p&gt;Now this method yields the same result as what Taylor does in Chapter 3 of &lt;em&gt;Classical Mechanics&lt;&#x2F;em&gt;. I show the
+steps here briefly. Starting with $\frac{dP}{dt}=F^{ext}$ we can determine the slight change in the rocket&#x27;s
+momentum by $dP = P(t + dt) - P(t) = (m + dm)(v + dv) - dm (v - v_{ex}) - m v$&lt;&#x2F;p&gt;
+&lt;p&gt;$$
+dP = m dv + dm v_{ex}
+$$
+$$
+\frac{dP}{dt} = m \frac{dv}{dt} + (m_0&#x2F;\tau) v_{ex} = -m g
+$$&lt;&#x2F;p&gt;
+&lt;p&gt;Which is the same result as above. Maybe this way of deriving the simple rocket equation is more straightforward
+but the heuristic trick above has always made more sense in my head when reasoning about this equation and
+related problems. Maybe it will help your thinking about the result, too.&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>

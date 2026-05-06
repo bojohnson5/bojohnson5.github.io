@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title>Bytes of Physics - Intro</title>
+    <link rel="self" type="application/atom+xml" href="https://bojohnson5.github.io/blog-tags/intro/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://bojohnson5.github.io"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2024-02-28T00:00:00+00:00</updated>
+    <id>https://bojohnson5.github.io/blog-tags/intro/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Introduction</title>
+        <published>2024-02-28T00:00:00+00:00</published>
+        <updated>2024-02-28T00:00:00+00:00</updated>
+        
+        <author>
+          <name>
+            
+              Unknown
+            
+          </name>
+        </author>
+        
+        <link rel="alternate" type="text/html" href="https://bojohnson5.github.io/blog/intro/"/>
+        <id>https://bojohnson5.github.io/blog/intro/</id>
+        
+        <content type="html" xml:base="https://bojohnson5.github.io/blog/intro/">&lt;h1 id=&quot;why-this-blog&quot;&gt;Why this blog?&lt;&#x2F;h1&gt;
+&lt;p&gt;Because I find my thinking gets sharpened and my mind clearer
+when I write down all that&#x27;s in my head. It&#x27;s easy for stuff
+to get lost up there and my experience with graduate school
+has been to work on many different things at once. So much
+so that I often forget what I have worked on only a year prior.
+(I do have things in my logbook or I can look back at code, but
+the fast pace of switching between so many projects for me has
+been a whirlwind.) So hopefully taking the time to put things
+I&#x27;m working on down in a longer, more carefully thought-out
+format will cement them in my head, rather than flying about
+with every change of the wind. Additionally, by writing more
+frequently I&#x27;m hoping to develop better as a writer for the
+future.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;what-will-i-write-about&quot;&gt;What will I write about?&lt;&#x2F;h1&gt;
+&lt;p&gt;I&#x27;m mainly going to write about my research and related topics.
+This will include what little theory I know (I&#x27;m no theorist or
+phenomenologist) so those posts will invariably contain mistakes
+that are my own. But I&#x27;ll also write about analysis and coding
+and even personal adventures as I go along.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;how-often-will-i-write&quot;&gt;How often will I write?&lt;&#x2F;h1&gt;
+&lt;p&gt;That&#x27;s the great question. I&#x27;m hoping I can write a post a week,
+that should motivate me to learn something interesting to write
+about or showcase what I&#x27;ve been working on. In any case, this
+is more a moonshot than a guarantee.&lt;&#x2F;p&gt;
+&lt;h1 id=&quot;who-is-this-blog-for&quot;&gt;Who is this blog for?&lt;&#x2F;h1&gt;
+&lt;p&gt;I&#x27;m guessing only my mom would take the time to read this. Hi,
+Mom!&lt;&#x2F;p&gt;
+</content>
+        
+    </entry>
+</feed>
